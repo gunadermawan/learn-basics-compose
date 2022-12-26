@@ -1,5 +1,6 @@
 package com.gunder.learn_basics_compose
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -48,6 +49,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Preview(showBackground = true, device = Devices.PIXEL_4_XL)
+@Preview(showBackground = true, device = Devices.PIXEL_4_XL, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun ComposeTheme() {
     Surface(
@@ -83,30 +85,37 @@ fun Greeting(name: String) {
             stiffness = Spring.StiffnessLow
         )
     )
-    Row(
-        modifier = Modifier.padding(8.dp),
-        verticalAlignment = Alignment.CenterVertically
+    Card(
+        backgroundColor = MaterialTheme.colors.primary,
+        shape = MaterialTheme.shapes.medium,
+        modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
-        Image(
-            painter = painterResource(R.drawable.img),
-            contentDescription = "logo jetpack compose",
-            modifier = Modifier.size(animateSizeDp)
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        Column(modifier = Modifier.weight(1f)) {
-            Text(text = "Hello $name!", fontSize = 24.sp, fontWeight = FontWeight.Bold)
-            Text(text = "Hello developer!")
-        }
-        IconButton(onClick = { isExpanded = !isExpanded }) {
-            Icon(
-                imageVector = if (isExpanded) Icons.Filled.KeyboardArrowUp else Icons.Outlined.ArrowDropDown,
-                contentDescription = if (isExpanded) "show less" else "show more"
+        Row(
+            modifier = Modifier.padding(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                painter = painterResource(R.drawable.img),
+                contentDescription = "logo jetpack compose",
+                modifier = Modifier.size(animateSizeDp)
             )
+            Spacer(modifier = Modifier.width(8.dp))
+            Column(modifier = Modifier.weight(1f)) {
+                Text(text = "Hello $name!", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                Text(text = "Hello developer!")
+            }
+            IconButton(onClick = { isExpanded = !isExpanded }) {
+                Icon(
+                    imageVector = if (isExpanded) Icons.Filled.KeyboardArrowUp else Icons.Outlined.ArrowDropDown,
+                    contentDescription = if (isExpanded) "show less" else "show more"
+                )
+            }
         }
     }
 }
 
 @Preview(showBackground = true)
+@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun DefaultPreview() {
     LearnbasicscomposeTheme {
