@@ -5,14 +5,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.outlined.ArrowDropDown
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,6 +42,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Preview(showBackground = true, device = Devices.PIXEL_4_XL)
 @Composable
 fun ComposeTheme() {
     Surface(
@@ -53,7 +56,7 @@ fun ComposeTheme() {
 @Composable
 fun GreetingList(name: List<String>) {
     if (name.isNotEmpty()) {
-        Column() {
+        Column {
             for (names in name) {
                 Greeting(name = names)
             }
@@ -65,16 +68,28 @@ fun GreetingList(name: List<String>) {
 
 @Composable
 fun Greeting(name: String) {
-    Row(modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+    var isExpanded by remember {
+        mutableStateOf(false)
+    }
+    Row(
+        modifier = Modifier.padding(8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Image(
             painter = painterResource(R.drawable.img),
             contentDescription = "logo jetpack compose",
             modifier = Modifier.size(80.dp)
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Column {
+        Column(modifier = Modifier.weight(1f)) {
             Text(text = "Hello $name!", fontSize = 24.sp, fontWeight = FontWeight.Bold)
             Text(text = "Hello developer!")
+        }
+        IconButton(onClick = { isExpanded = !isExpanded }) {
+            Icon(
+                imageVector = if (isExpanded) Icons.Filled.KeyboardArrowUp else Icons.Outlined.ArrowDropDown,
+                contentDescription = if (isExpanded) "show less" else "show more"
+            )
         }
     }
 }
