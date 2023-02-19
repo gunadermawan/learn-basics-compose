@@ -13,8 +13,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material.icons.outlined.ArrowDropDown
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -61,15 +61,22 @@ fun ComposeTheme() {
 }
 
 @Composable
-fun GreetingList(name: List<String>) {
-    if (name.isNotEmpty()) {
+fun GreetingList(names: List<String>) {
+    if (names.isNotEmpty()) {
+//        Column {
+//            for (name in names) {
+//                Greeting(name)
+//            }
+//        }
         LazyColumn() {
-            items(name) { name ->
-                Greeting(name)
+            items(names) {
+                Greeting(it)
             }
         }
     } else {
-        Text("something people!")
+        Box(contentAlignment = Alignment.Center) {
+            Text("data not found!")
+        }
     }
 }
 
@@ -78,40 +85,38 @@ fun Greeting(name: String) {
     var isExpanded by remember {
         mutableStateOf(false)
     }
-    val animateSizeDp by animateDpAsState(
-        if (isExpanded) 120.dp else 80.dp,
-        animationSpec = spring(
+    val animatedSizeDp by animateDpAsState(
+        targetValue = if (isExpanded) 120.dp else 80.dp, animationSpec = spring(
             dampingRatio = Spring.DampingRatioMediumBouncy,
             stiffness = Spring.StiffnessLow
         )
     )
     Card(
-        backgroundColor = MaterialTheme.colors.primary,
+        backgroundColor = MaterialTheme.colors.onPrimary,
         shape = MaterialTheme.shapes.medium,
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
-        Row(
-            modifier = Modifier.padding(8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+
+        Row(modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
             Image(
                 painter = painterResource(R.drawable.img),
-                contentDescription = "logo jetpack compose",
-                modifier = Modifier.size(animateSizeDp)
+                contentDescription = "Compose LogoΩ",
+                modifier = Modifier.size(animatedSizeDp)
             )
             Spacer(modifier = Modifier.width(8.dp))
             Column(modifier = Modifier.weight(1f)) {
-                Text(text = "Hello $name!", fontSize = 24.sp, fontWeight = FontWeight.Bold)
-                Text(text = "Hello developer!")
+                Text(text = "Hello $name", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                Text(text = "welcome bro!")
             }
             IconButton(onClick = { isExpanded = !isExpanded }) {
                 Icon(
-                    imageVector = if (isExpanded) Icons.Filled.KeyboardArrowUp else Icons.Outlined.ArrowDropDown,
+                    imageVector = if (isExpanded) Icons.Filled.KeyboardArrowDown else Icons.Filled.KeyboardArrowUp,
                     contentDescription = if (isExpanded) "show less" else "show more"
                 )
             }
         }
     }
+
 }
 
 @Preview(showBackground = true)
