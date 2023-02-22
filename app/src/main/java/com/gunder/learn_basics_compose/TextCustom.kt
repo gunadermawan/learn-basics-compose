@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
@@ -64,20 +65,26 @@ fun CustomText() {
 
 @Composable
 fun CustomTextAnnotated() {
-    Text(buildAnnotatedString {
-        withStyle(
-            style = SpanStyle(
-                color = MaterialTheme.colors.primary,
-                fontStyle = FontStyle.Italic,
-                fontSize = 20.sp
-            )
-        ) {
-            append('A')
-        }
-        append('B')
-        append('C')
-        append('D')
-    })
+    Text(
+        buildAnnotatedString {
+            withStyle(
+                style = ParagraphStyle(textAlign = TextAlign.Center)
+            ) {
+                withStyle(
+                    style = SpanStyle(
+                        color = Color.Red,
+                        fontStyle = FontStyle.Italic,
+                        fontSize = 20.sp
+                    )
+                ) {
+                    append('A')
+                }
+                append('B')
+                append('C')
+                append('D')
+            }
+        }, modifier = Modifier.width(200.dp)
+    )
 }
 
 @Preview(showBackground = true)
@@ -93,7 +100,5 @@ fun CustomTextPreview() {
 @Preview(showBackground = true, device = Devices.PIXEL_4_XL)
 @Composable
 fun CustomTextAnnotatedPreview() {
-    LearnbasicscomposeTheme() {
-        CustomTextAnnotated()
-    }
+    CustomTextAnnotated()
 }
