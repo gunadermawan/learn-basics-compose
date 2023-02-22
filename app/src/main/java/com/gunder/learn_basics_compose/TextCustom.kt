@@ -21,6 +21,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
@@ -87,14 +88,23 @@ fun CustomTextAnnotated() {
     )
 }
 
+@Composable
+fun StringRepeat() {
+    Text(text = "hello compose".repeat(20), maxLines = 3, overflow = TextOverflow.Ellipsis)
+}
+
+@Preview(showBackground = true)
+@Composable
+fun StringRepeatPreview() {
+    StringRepeat()
+}
+
 @Preview(showBackground = true)
 @Composable
 fun CustomTextPreview() {
     LearnbasicscomposeTheme {
         CustomText()
-        CustomTextAnnotated()
     }
-
 }
 
 @Preview(showBackground = true, device = Devices.PIXEL_4_XL)
