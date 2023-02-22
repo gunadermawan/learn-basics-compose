@@ -12,9 +12,13 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.gunder.learn_basics_compose.ui.theme.LearnbasicscomposeTheme
 
 class TextCustom : ComponentActivity() {
@@ -44,7 +48,11 @@ fun DefaultPreview2() {
                 text = stringResource(id = R.string.title_activity_text_custom),
                 modifier = Modifier
                     .background(MaterialTheme.colors.primary)
-                    .padding(16.dp)
+                    .padding(16.dp),
+                color = Color.White,
+                fontSize = MaterialTheme.typography.h5.fontSize,
+                fontStyle = FontStyle.Italic,
+                fontWeight = FontWeight.ExtraBold
             )
         }
     }
