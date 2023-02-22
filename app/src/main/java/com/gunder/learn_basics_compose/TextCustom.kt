@@ -15,11 +15,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.gunder.learn_basics_compose.ui.theme.LearnbasicscomposeTheme
 
 class TextCustom : ComponentActivity() {
@@ -57,10 +62,38 @@ fun CustomText() {
     }
 }
 
+@Composable
+fun CustomTextAnnotated() {
+    Text(buildAnnotatedString {
+        withStyle(
+            style = SpanStyle(
+                color = MaterialTheme.colors.primary,
+                fontStyle = FontStyle.Italic,
+                fontSize = 20.sp
+            )
+        ) {
+            append('A')
+        }
+        append('B')
+        append('C')
+        append('D')
+    })
+}
+
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview2() {
+fun CustomTextPreview() {
     LearnbasicscomposeTheme {
         CustomText()
+        CustomTextAnnotated()
+    }
+
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_4_XL)
+@Composable
+fun CustomTextAnnotatedPreview() {
+    LearnbasicscomposeTheme() {
+        CustomTextAnnotated()
     }
 }
