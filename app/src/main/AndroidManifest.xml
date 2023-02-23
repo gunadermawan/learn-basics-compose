@@ -13,6 +13,11 @@
         android:theme="@style/Theme.Learnbasicscompose"
         tools:targetApi="31">
         <activity
+            android:name=".SuperScript"
+            android:exported="false"
+            android:label="@string/title_activity_super_script"
+            android:theme="@style/Theme.Learnbasicscompose" />
+        <activity
             android:name=".TextCustom"
             android:exported="false"
             android:label="@string/title_activity_text_custom"
